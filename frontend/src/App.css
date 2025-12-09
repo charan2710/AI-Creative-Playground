@@ -1,0 +1,659 @@
+/* frontend/src/App.css */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+:root {
+  --primary-color: #4F46E5;
+  --accent-gradient: linear-gradient(45deg, #818cf8, #c084fc);
+  --background-color: #f3f4f6;
+  --card-background: rgba(255, 255, 255, 0.6);
+  --text-color: #111827;
+  --text-muted-color: #6b7280;
+  --font-family: 'Poppins', 'Inter', sans-serif;
+}
+
+body {
+
+  font-family: var(--font-family);
+
+  background-color: var(--background-color);
+
+  color: var(--text-color);
+
+}
+
+
+
+/* Optional: make whole app breathe a bit */
+
+
+
+.App {
+
+
+
+  min-height: 100vh;
+
+
+
+  position: relative;
+
+
+
+  overflow-x: hidden; /* Prevent horizontal scroll from background elements */
+
+
+
+}
+
+
+
+
+
+
+
+/* Background enhancement: animated shapes and gradient rings improving visual richness (more visible) */
+
+
+
+.App::before,
+
+
+
+.App::after {
+
+
+
+  content: "";
+
+
+
+  position: fixed;
+
+
+
+  top: 0;
+
+
+
+  width: 45vw; /* Adjust width for desktop */
+
+
+
+  height: 100vh;
+
+
+
+  pointer-events: none;
+
+
+
+  z-index: -2; /* Sit behind the main UI card */
+
+
+
+  background-repeat: no-repeat;
+
+
+
+  background-size: contain;
+
+
+
+  opacity: 0.45; /* Increased opacity for more visibility */
+
+
+
+  filter: blur(4px); /* Slightly less blur for clearer shapes */
+
+
+
+  transition: opacity 0.5s ease;
+
+
+
+  animation: background-float 15s ease-in-out infinite alternate;
+
+
+
+}
+
+
+
+
+
+
+
+@keyframes background-float {
+
+
+
+  0% { transform: translateY(0px) scale(1); }
+
+
+
+  100% { transform: translateY(-30px) scale(1.05); }
+
+
+
+}
+
+
+
+
+
+
+
+.App::before {
+
+
+
+  left: 0;
+
+
+
+  background-image:
+
+
+
+    radial-gradient(circle 400px at 30% 60%, rgba(140, 111, 255, 0.45), transparent 70%),
+
+
+
+    url('/assets/triangle.svg'),
+
+
+
+    url('/assets/circle.svg');
+
+
+
+  background-position: top 10% left 15%, top 50% left 5%, top 80% left 20%;
+
+
+
+  background-size: 100%, 80px, 120px;
+
+
+
+}
+
+
+
+
+
+
+
+.App::after {
+
+
+
+  right: 0;
+
+
+
+  background-image:
+
+
+
+    radial-gradient(circle 350px at 60% 40%, rgba(230, 80, 255, 0.48), transparent 70%),
+
+
+
+    url('/assets/diamond.svg'),
+
+
+
+    url('/assets/spark.svg');
+
+
+
+  background-position: top 20% right 10%, top 70% right 15%, top 40% right 5%;
+
+
+
+  background-size: 100%, 90px, 110px;
+
+
+
+  animation-delay: 2s; /* Stagger animation */
+
+
+
+}
+
+
+
+
+
+
+
+/* Responsive adjustments for smaller screens */
+
+
+
+@media (max-width: 768px) {
+
+
+
+  .App::before,
+
+
+
+  .App::after {
+
+
+
+    width: 100vw;
+
+
+
+    height: 50vh;
+
+
+
+    opacity: 0.25; /* Adjusted for smaller screens */
+
+
+
+    filter: blur(3px);
+
+
+
+    background-size: cover;
+
+
+
+  }
+
+
+
+
+
+
+
+  .App::before {
+
+
+
+    top: 0;
+
+
+
+    left: 0;
+
+
+
+    background-position: center top;
+
+
+
+  }
+
+
+
+
+
+
+
+  .App::after {
+
+
+
+    top: 50%;
+
+
+
+    right: 0;
+
+
+
+    background-position: center bottom;
+
+
+
+  }
+
+
+
+}
+
+
+
+
+
+
+
+/* ---------- HERO SECTION ---------- */
+
+
+
+
+
+
+
+.hero-section {
+
+
+
+  padding: 4rem 1rem 3rem;
+
+
+
+  /* BACKGROUND CLEANUP - removed decorative shapes and increased gradient visibility */
+
+
+
+  background: radial-gradient(circle at top left, rgba(99,102,241,0.55), transparent 40%),
+
+
+
+              radial-gradient(circle at bottom right, rgba(168,85,247,0.55), transparent 50%),
+
+
+
+              linear-gradient(90deg, rgba(99,102,241,0.55), rgba(168,85,247,0.55));
+
+
+
+  text-align: center;
+
+
+
+}
+
+/* UI ENHANCEMENT: premium hero text hover */
+.hero-title {
+  font-size: 3.2rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.75rem;
+  background: linear-gradient(135deg, #4f46e5, #ec4899, #f97316);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+  position: relative;
+  transition: all 0.3s ease-out; /* Smoother transition */
+}
+
+/* Refined hover: softer glow, existing scale */
+.hero-title:hover {
+  transform: scale(1.03);
+  text-shadow: 0 0 25px rgba(79, 70, 229, 0.5);
+}
+
+/* Shiny sweep animation on hover */
+.hero-title::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -15%;
+  width: 30%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0.6),
+    rgba(255, 255, 255, 0)
+  );
+  opacity: 0; /* hide initially */
+  transform: skewX(-25deg);
+  pointer-events: none;
+  animation: hero-shine 0.85s ease-out;
+  animation-play-state: paused;
+}
+
+.hero-title:hover::after {
+  animation-play-state: running;
+}
+
+@keyframes hero-shine {
+  0% {
+    transform: skewX(-25deg) translateX(-150%);
+  }
+  100% {
+    transform: skewX(-25deg) translateX(350%);
+  }
+}
+
+/* Subtitle under the title */
+.hero-subtitle {
+  font-size: 1.05rem;
+  color: #4338ca;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* keep icon */
+.creative-icon {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 1rem;
+  opacity: 0.9;
+}
+
+/* ---------- MAIN LAYOUT & VIEW SYSTEM ---------- */
+
+.content-container {
+  position: relative;
+  min-height: 500px;
+  max-width: 1200px;           /* NEW: center and constrain width */
+  margin: 0 auto 3.5rem;       /* center horizontally + give bottom space */
+  padding: 0 1.5rem;           /* side padding */
+}
+
+/* Soft “workspace” feel around upload section */
+.main-container {
+  background: radial-gradient(circle at top left, #eef2ff 0, #f9fafb 45%, #ffffff 100%);
+  border-radius: 22px;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+  padding: 2rem;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+/* Upload wrapper as before, but we can keep it */
+.upload-wrapper {
+  transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+}
+
+.results-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  opacity: 0;
+  pointer-events: none;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 5rem;
+}
+
+/* ---------- STATE-DRIVEN ANIMATIONS ---------- */
+
+.app-status-idle .upload-wrapper {
+  opacity: 1;
+  transform: scale(1);
+}
+.app-status-idle .results-wrapper {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.app-status-absorbing .upload-card,
+.app-status-generating .upload-card {
+  opacity: 0 !important; /* Hide the card during absorb/generating */
+  pointer-events: none;
+  transition: opacity 0.3s ease-in;
+}
+
+.app-status-absorbing .results-wrapper,
+.app-status-generating .results-wrapper,
+.app-status-presenting .results-wrapper {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.app-status-presenting .loading-container {
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
+}
+
+/* ---------- FOOTER ---------- */
+
+.footer {
+  text-align: center;
+  padding: 2rem 1rem;
+  background-color: var(--background-color);
+  color: var(--text-muted-color);
+}
+
+.footer-icons {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.footer-icons a {
+  color: var(--text-muted-color);
+  transition: color 0.2s ease, transform 0.15s ease;
+}
+
+.footer-icons a:hover {
+  color: var(--primary-color);
+  transform: translateY(-2px);
+}
+
+/* UI ENHANCEMENT: theme-reactive left visual panel */
+.theme-visual-panel {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 20vw; /* Takes up a portion of the left screen */
+  height: 100%;
+  z-index: 0; /* Behind the main content */
+  opacity: 0.3;
+  pointer-events: none;
+  transition: background 0.5s ease;
+  overflow: hidden; /* Hide overflowing animation elements */
+}
+
+/* Base style for animated shapes inside the panel */
+.theme-visual-panel::before,
+.theme-visual-panel::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  animation-duration: 15s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+/* Specific theme styles */
+/* --- Sporty --- */
+@keyframes sporty-wave {
+  0%, 100% { transform: translateY(-50%) translateX(-50%) scale(1); }
+  50% { transform: translateY(-50%) translateX(-50%) scale(1.5); }
+}
+.theme-sporty .theme-visual-panel {
+  background: radial-gradient(circle at 10% 20%, #ff512f 0%, transparent 50%),
+              radial-gradient(circle at 80% 90%, #dd2476 0%, transparent 50%);
+}
+.theme-sporty .theme-visual-panel::before {
+  width: 300px;
+  height: 300px;
+  background: linear-gradient(45deg, #ff512f, #dd2476);
+  left: 50%;
+  top: 50%;
+  animation-name: sporty-wave;
+  filter: blur(80px);
+}
+
+/* --- Luxury --- */
+@keyframes luxury-flow {
+  0% { transform: translateY(100%) scale(0.5); opacity: 0; }
+  50% { opacity: 0.6; }
+  100% { transform: translateY(-100%) scale(1.2); opacity: 0; }
+}
+.theme-luxury .theme-visual-panel {
+  background: #1a1a1a;
+}
+.theme-luxury .theme-visual-panel::before {
+  width: 150px;
+  height: 150px;
+  background: #FFD700;
+  left: 20%;
+  top: 0;
+  filter: blur(60px);
+  animation-name: luxury-flow;
+  animation-duration: 20s;
+}
+.theme-luxury .theme-visual-panel::after {
+  width: 200px;
+  height: 200px;
+  background: #DAA520;
+  right: 10%;
+  bottom: -50%;
+  filter: blur(70px);
+  animation-name: luxury-flow;
+  animation-duration: 25s;
+  animation-delay: -10s;
+}
+
+/* --- Nature --- */
+@keyframes nature-sway {
+  0%, 100% { transform: translateX(0) rotate(0deg); }
+  50% { transform: translateX(50px) rotate(10deg); }
+}
+.theme-nature .theme-visual-panel {
+  background: radial-gradient(circle at 20% 80%, #283c0c, transparent 60%);
+}
+.theme-nature .theme-visual-panel::before {
+  width: 250px;
+  height: 250px;
+  background: #5a7d2a;
+  opacity: 0.4;
+  left: 30%;
+  top: 40%;
+  filter: blur(80px);
+  animation-name: nature-sway;
+}
+
+/* --- Festival --- */
+@keyframes festival-burst {
+  0%, 100% { transform: scale(1); opacity: 0.7; }
+  50% { transform: scale(1.8); opacity: 0.4; }
+}
+.theme-festival .theme-visual-panel {
+  background: radial-gradient(circle at 80% 20%, #ff00cc, transparent 50%);
+}
+.theme-festival .theme-visual-panel::before {
+  width: 200px;
+  height: 200px;
+  background: #ff7f00;
+  left: 40%;
+  top: 50%;
+  filter: blur(70px);
+  animation-name: festival-burst;
+}
+
+/* --- Minimal --- */
+@keyframes minimal-fade {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 0.4; }
+}
+.theme-minimal .theme-visual-panel {
+  background: #e0e0e0;
+}
+.theme-minimal .theme-visual-panel::before {
+  width: 300px;
+  height: 300px;
+  background: #c0c0c0;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  filter: blur(100px);
+  animation-name: minimal-fade;
+}
+

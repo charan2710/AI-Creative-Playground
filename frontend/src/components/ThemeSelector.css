@@ -1,0 +1,68 @@
+/* UI ENHANCEMENT: premium theme chips */
+.theme-selector-container {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.theme-selector-container h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-muted-color);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 1.5rem;
+}
+
+.theme-chips {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.theme-chip {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.25rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50px;
+  cursor: pointer;
+  background-color: #fff;
+  color: #4b5563;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  transition: all 0.2s ease-out;
+  position: relative;
+}
+
+.theme-chip:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 7px 20px rgba(0,0,0,0.12);
+}
+
+.theme-chip.active {
+  color: white;
+  background: var(--accent-gradient);
+  box-shadow: 0 8px 25px rgba(129, 140, 248, 0.4);
+  transform: translateY(-2px) scale(1.02);
+  border-color: transparent;
+}
+
+/* Glowing border for active chip */
+.theme-chip.active::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50px;
+  background: var(--accent-gradient);
+  filter: blur(8px);
+  z-index: -1;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.theme-chip-icon {
+  font-size: 1.1rem;
+}

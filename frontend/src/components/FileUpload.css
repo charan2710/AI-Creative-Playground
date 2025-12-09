@@ -1,0 +1,224 @@
+@keyframes absorb-product {
+  0% { transform: translate(0, 0) scale(1); opacity: 1; }
+  100% { transform: translate(50%, -100%) scale(0); opacity: 0; }
+}
+
+@keyframes absorb-logo {
+  0% { transform: translate(0, 0) scale(1); opacity: 1; }
+  100% { transform: translate(-50%, -100%) scale(0); opacity: 0; }
+}
+
+/* frontend/src/components/FileUpload.css */
+@keyframes rotate-3d {
+  0% { transform: rotateY(0deg); }
+  50% { transform: rotateY(180deg); }
+  100% { transform: rotateY(360deg); }
+}
+
+/* UI ENHANCEMENT: glassmorphic upload card */
+.upload-card {
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 2.5rem;
+  box-shadow: 0 10px 40px rgba(31, 38, 135, 0.12);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: center;
+  transition: opacity 0.4s ease-in-out;
+}
+
+.upload-area {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* UI ENHANCEMENT: improved drop zone */
+.drop-zone {
+  border: 2px dashed #c1bddf;
+  border-radius: 16px;
+  padding: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: rgba(255, 255, 255, 0.5);
+  text-align: center;
+  position: relative;
+}
+
+.drop-zone::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 16px;
+  border: 2px dashed var(--primary-color);
+  opacity: 0;
+  animation: pulse-border 2s infinite;
+  animation-play-state: paused;
+}
+
+.drop-zone.is-active::before {
+  animation-play-state: running;
+  opacity: 1;
+}
+
+@keyframes pulse-border {
+  0%, 100% { opacity: 0.8; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.98); }
+}
+
+.drop-zone.is-active {
+  background-color: rgba(79, 70, 229, 0.05);
+  border-color: transparent;
+}
+
+.drop-zone-icon {
+  width: 48px;
+  height: 48px;
+  color: #a7a2f5;
+  margin-bottom: 0.5rem;
+  transition: color 0.3s ease;
+}
+
+.drop-zone.is-active .drop-zone-icon {
+  color: var(--primary-color);
+}
+
+.drop-zone p {
+  margin: 0;
+  font-weight: 600;
+  color: var(--text-color);
+  font-size: 0.9rem;
+}
+
+.drop-zone .hint-text {
+  font-size: 0.8rem;
+  color: var(--text-muted-color);
+}
+
+
+/* UI ENHANCEMENT: styled preview placeholder */
+.preview-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 250px;
+  background-color: rgba(238, 242, 255, 0.6);
+  border-radius: 16px;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.preview-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #94a3b8;
+  text-align: center;
+  padding: 2rem;
+}
+
+.preview-placeholder-icon {
+  width: 64px;
+  height: 64px;
+  color: #cbd5e1;
+}
+
+.preview-image {
+  max-width: 90%;
+  max-height: 220px;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.preview-image:hover {
+  transform: scale(1.05);
+}
+
+/* UI ENHANCEMENT: slow rotation animation for product preview */
+.preview-image.preview-rotate {
+  animation: preview-hor-rotate 10s linear infinite; /* UI ENHANCEMENT: horizontal 3D Y-axis full rotation */
+  transform-origin: center center;
+  transform-style: preserve-3d;
+}
+
+@keyframes preview-hor-rotate {
+  from { transform: rotateY(0deg); }
+  to   { transform: rotateY(360deg); }
+}
+
+
+.generate-btn-container {
+  grid-column: 1 / -1; /* Make button span both columns */
+  margin-top: 1rem;
+  transition: opacity 0.3s ease-in;
+}
+
+/* UI ENHANCEMENT: premium 'Generate Creatives' button */
+.generate-btn {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 16px;
+  border: none;
+  background: linear-gradient(110deg, #4F46E5, #a855f7, #4F46E5);
+  background-size: 200% 100%;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1), inset 0 -2px 0 rgba(0,0,0,0.2);
+  cursor: pointer;
+  transition: all 0.3s ease-out;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  animation: gradient-pan 4s linear infinite;
+}
+
+@keyframes gradient-pan {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+.generate-btn:hover:not(:disabled) {
+  transform: scale(1.02);
+  box-shadow: 0 8px 25px rgba(129, 140, 248, 0.4);
+}
+
+.generate-btn:active:not(:disabled) {
+  transform: scale(0.98); /* Micro-bounce */
+  transition-duration: 0.1s;
+}
+
+.generate-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  animation: none; /* Stop gradient animation when disabled */
+}
+
+.generate-btn.is-loading {
+  cursor: wait;
+}
+
+
+/* --- Animation States --- */
+.app-status-absorbing .drop-zone[data-type="product"] {
+  animation: absorb-product 0.6s ease-in forwards;
+}
+
+.app-status-absorbing .drop-zone[data-type="logo"] {
+  animation: absorb-logo 0.6s ease-in forwards;
+}
+
+.app-status-absorbing .preview-container,
+.app-status-absorbing .generate-btn-container {
+    opacity: 0;
+}

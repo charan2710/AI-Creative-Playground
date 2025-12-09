@@ -1,0 +1,201 @@
+@keyframes emerge-from-forge {
+  from {
+    opacity: 0;
+    transform: translateY(-200px) scale(0.2);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes slide-in-side {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* frontend/src/components/LayoutDisplay.css */
+
+.layout-card {
+  border: none;
+  border-radius: 20px;
+  background-color: #ffffff;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+  animation: none; /* Remove default animation */
+  opacity: 0; /* Start as invisible */
+  will-change: transform, opacity;
+  position: relative;
+}
+
+/* Animation applied by App.jsx based on status */
+.app-status-presenting .layout-card.is-first {
+    animation: emerge-from-forge 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.app-status-presenting .layout-card:not(.is-first) {
+    animation: slide-in-side 0.5s ease-out forwards;
+}
+
+
+/* UI ENHANCEMENT: layout card hover polish */
+.layout-card:hover {
+  transform: translateY(-12px) scale(1.03);
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.15);
+}
+
+.card-img-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px 20px 0 0;
+}
+
+/* UI ENHANCEMENT: premium 'Top Pick' badge */
+.top-pick-badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: linear-gradient(45deg, #ffc107, #ff9800);
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  box-shadow: 0 4px 15px rgba(255, 152, 0, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  z-index: 2;
+}
+
+.top-pick-badge::before {
+  content: '🏆';
+  margin-right: 6px;
+}
+
+.layout-card.is-top-pick .top-pick-badge::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50px;
+  border: 2px solid #ffc107;
+  animation: pulse-glow 2s infinite;
+  z-index: -1;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(1.1);
+  }
+}
+
+
+.card-body {
+  padding: 24px;
+}
+
+.card-title {
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--text-color);
+  margin-bottom: 1rem;
+}
+
+/* --- Circular Score Indicator --- */
+.score-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.score-circle {
+  width: 60px;
+  height: 60px;
+  position: relative;
+  transform: rotate(-90deg);
+}
+
+.score-circle-bg {
+  fill: none;
+  stroke: #e9ecef;
+  stroke-width: 8;
+}
+
+.score-circle-fg {
+  fill: none;
+  stroke: url(#score-gradient);
+  stroke-width: 8;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 1s ease-out;
+}
+
+.score-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.score-label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.palette-container {
+  margin-bottom: 1.5rem;
+}
+
+.palette-label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #6c757d;
+  margin-bottom: 0.5rem;
+}
+
+.swatches {
+  display: flex;
+  gap: 8px;
+}
+
+.swatch {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.download-btn {
+  border: none;
+  font-weight: 700;
+  padding: 12px 24px;
+  border-radius: 12px;
+  color: #fff;
+  background: var(--accent-gradient);
+  box-shadow: 0 4px 15px rgba(118, 75, 162, 0.1);
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.download-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(118, 75, 162, 0.25);
+  filter: brightness(1.1);
+  color: #fff;
+}
