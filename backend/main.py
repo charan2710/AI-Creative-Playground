@@ -90,7 +90,12 @@ app = FastAPI()
 
 
 # Configure CORS
-origins = ["http://localhost:5173", "http://127.0.0.1:5173"]
+origins = [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+    "https://ai-creative-playgrounds-6kcytggpv-charans-projects-c78f10e7.vercel.app",
+]
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
