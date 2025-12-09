@@ -81,26 +81,27 @@ function App() {
       formData.append('logo_image', brandLogo);
       formData.append('theme', theme);
 
-      try {
-       const API_BASE = "https://ai-creative-playground-1.onrender.com";
+      setTimeout(async () => {
+  try {
+    const API_BASE = "https://ai-creative-playground-1.onrender.com";
 
-const response = await fetch(`${API_BASE}/generate_layouts/`, {
-  method: "POST",
-  body: formData,
-});
+    const response = await fetch(`${API_BASE}/generate_layouts/`, {
+      method: "POST",
+      body: formData,
+    });
 
+    if (!response.ok) throw new Error(`Network error: ${response.status}`);
 
-        if (!response.ok) throw new Error(`Network error: ${response.status}`);
+    const data = await response.json();
+    setLayouts(data.layouts.sort((a, b) => b.score - a.score));
+    setGenerationStatus("presenting");
 
-        const data = await response.json();
-        setLayouts(data.layouts.sort((a, b) => b.score - a.score));
-        setGenerationStatus('presenting');
-      } catch (err) {
-        setError(`Failed to generate layouts: ${err.message}`);
-        setGenerationStatus('idle');
-      }
-    }, 600);
-  };
+  } catch (err) {
+    setError(`Failed to generate layouts: ${err.message}`);
+    setGenerationStatus("idle");
+  }
+}, 600);
+
 
   const handleStartOver = () => {
     setGenerationStatus('idle');
