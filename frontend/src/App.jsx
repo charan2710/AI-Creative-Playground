@@ -68,26 +68,39 @@ function App() {
     }
   }, [logo]);
 
-  const handleGenerateLayouts = setTimeout(async () => {
-  try {
-    const API_BASE = "https://ai-creative-playground-1.onrender.com";
+ 
+     const handleGenerateLayouts = async (productImg, brandLogo, theme) => {
+    // reset state for new generation
+    setLayouts([]);
+    setError(null);
+    setGenerationStatus('absorbing');
 
-    const response = await fetch(`${API_BASE}/generate_layouts/`, {
-      method: "POST",
-      body: formData,
-    });
+    const formData = new FormData();
+    formData.append('product_image', productImg);
+    formData.append('logo_image', brandLogo);
+    formData.append('theme', theme);
 
-    if (!response.ok) throw new Error(`Network error: ${response.status}`);
+    setTimeout(async () => {
+      try {
+        const API_BASE = "https://ai-creative-playground-1.onrender.com";
 
-    const data = await response.json();
-    setLayouts(data.layouts.sort((a, b) => b.score - a.score));
-    setGenerationStatus("presenting");
+        const response = await fetch(`${API_BASE}/generate_layouts/`, {
+          method: "POST",
+          body: formData,
+        });
 
-  } catch (err) {
-    setError(`Failed to generate layouts: ${err.message}`);
-    setGenerationStatus("idle");
-  }
-}, 600);
+        if (!response.ok) throw new Error(`Network error: ${response.status}`);
+
+        const data = await response.json();
+        setLayouts(data.layouts.sort((a, b) => b.score - a.score));
+        setGenerationStatus("presenting");
+      } catch (err) {
+        setError(`Failed to generate layouts: ${err.message}`);
+        setGenerationStatus("idle");
+      }
+    }, 600);
+  };
+
 
 
   const handleStartOver = () => {
