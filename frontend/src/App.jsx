@@ -82,10 +82,13 @@ function App() {
       formData.append('theme', theme);
 
       try {
-        const response = await fetch('http://localhost:8000/generate_layouts/', {
-          method: 'POST',
-          body: formData,
-        });
+       const API_BASE = "https://ai-creative-playground-1.onrender.com";
+
+const response = await fetch(`${API_BASE}/generate_layouts/`, {
+  method: "POST",
+  body: formData,
+});
+
 
         if (!response.ok) throw new Error(`Network error: ${response.status}`);
 
